@@ -1,6 +1,5 @@
 const express = require('express');
 const mongoose = require('mongoose');
-mongoose.Promise = require('bluebird');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const path = require('path');
@@ -12,6 +11,9 @@ const app = express();
 const Activity = require('./models/activity');
 const User = require('./models/user');
 
+mongoose.Promise = require('bluebird');
+mongoose.connect('mongodb://localhost:27017/statdb');
+
 //endpoints
 //GET /api/activities
 app.get('api/activities', (req, res) => {
@@ -19,13 +21,14 @@ app.get('api/activities', (req, res) => {
 });
 //POST /api/activities make a activity
 app.post('api/activities', (req, res) =>{
-  res.json(activity);
+  res.json(activities);
 });
 //GET /api/activites/:id
 //PUT /api/activities/:id
 //DELETE /api/activities/id
 //POST /api/activities/:id/stats
 //DELETE /api/activities/stats
+
 
 
 
