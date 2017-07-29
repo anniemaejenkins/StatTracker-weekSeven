@@ -8,10 +8,14 @@ const path = require('path');
 
 const app = express();
 
+// require in models
+const Activity = require('./models/activity');
+const User = require('./models/user');
+
 //endpoints
 //GET /api/activities
 app.get('api/activities', (req, res) => {
-  res.json({});
+  res.json(activities);
 });
 //POST /api/activities make a activity
 app.post('api/activities', (req, res) =>{
