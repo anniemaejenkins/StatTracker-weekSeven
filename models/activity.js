@@ -9,7 +9,7 @@ const activitySchema = new mongoose.Schema({
     unique: true
   },
   // day activity is done
-  stats: {
+  stat: {
     date: Date
   },
   // how many times activity is attempted a day

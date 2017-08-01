@@ -16,8 +16,10 @@ mongoose.connect('mongodb://localhost:27017/statdb');
 
 //endpoints
 //GET /api/activities
-app.get('api/activities', (req, res) => {
-  res.json(activities);
+app.get('/api/activities', (req, res) => {
+  Activity.find({}, function (err, activities){
+    res.json(activities);
+  });
 });
 //POST /api/activities make a activity
 app.post('api/activities', (req, res) =>{
@@ -28,7 +30,6 @@ app.post('api/activities', (req, res) =>{
 //DELETE /api/activities/id
 //POST /api/activities/:id/stats
 //DELETE /api/activities/stats
-
 
 
 
