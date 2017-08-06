@@ -9,8 +9,15 @@ module.exports = {
 
   list: function(req, res) {
     Activity.find({}).then(results => {
-      console.log('results', results);
-        res.render('activity/list', {model: results});
+      // console.log('results', activities);
+        res.json(results);
+    });
+  },
+  create: function(req, res) {
+    let newActivity = new Activity({activity: req.body.activity});
+    newActivity.save().then(results => {
+      console.log('activity', results);
+      res.json(results);
     });
   }
 };

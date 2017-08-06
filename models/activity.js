@@ -2,18 +2,8 @@ const mongoose = require('mongoose');
 
  // activity schema
 const activitySchema = new mongoose.Schema({
-  // keys and values
-  // activity name
-  activity: {
-    type: String,
-    unique: true
-  },
-  // day activity is done
-  stat: {
-    date: Date
-  },
-  // how many times activity is attempted a day
-  attempts: Number
+  activity: {type: String, required: true},
+  attempts: {type: Number}
 });
 
 //compiles schema into a model

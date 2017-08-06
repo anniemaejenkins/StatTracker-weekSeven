@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const path = require('path');
 
+const activityController = require('./controllers/activities.js');
+
 
 const app = express();
 
@@ -11,20 +13,20 @@ const app = express();
 const Activity = require('./models/activity');
 const User = require('./models/user');
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+
 mongoose.Promise = require('bluebird');
 mongoose.connect('mongodb://localhost:27017/statdb');
 
 //endpoints
 //GET /api/activities
-app.get('/api/activities', (req, res) => {
-  Activity.find({}, function (err, activities){
-    res.json(activities);
-  });
-});
+app.get('/api/activities', activityController.list );
+
 //POST /api/activities make a activity
-app.post('api/activities', (req, res) =>{
-  res.json(activities);
-});
+app.post('api/activities', activityController.create);
+
+
 //GET /api/activites/:id
 //PUT /api/activities/:id
 //DELETE /api/activities/id
