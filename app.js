@@ -21,18 +21,26 @@ mongoose.connect('mongodb://localhost:27017/statdb');
 
 //endpoints
 //GET /api/activities
-app.get('/api/activities', activityController.list );
+app.get('/api/activities', activityController.list);
 
 //POST /api/activities make a activity
 app.post('/api/activities', activityController.create);
 
-
 //GET /api/activites/:id
-//PUT /api/activities/:id
-//DELETE /api/activities/id
-//POST /api/activities/:id/stats
-//DELETE /api/activities/stats
+app.get('/api/activities/:id', activityController.findActivity);
 
+//PUT /api/activities/:id
+app.put('/api/activities/:id', activityController.updateActivity);
+
+//DELETE /api/activities/:id
+app.delete('/api/activities/:id', activityController.delete);
+
+//POST /api/activities/:id/stats
+app.post('/api/activities/:id/stats', activityController.updateStats);
+
+//DELETE /api/activities/stats
+// https://stackoverflow.com/questions/15641492/mongodb-remove-object-from-array
+app.delete('/api/activities/:id/stats', activityController.deleteStats);
 
 
 

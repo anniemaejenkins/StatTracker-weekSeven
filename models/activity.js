@@ -2,7 +2,11 @@ const mongoose = require('mongoose');
 
  // activity schema
 const activitySchema = new mongoose.Schema({
-  activity: {type: String, required: true}
+  activity: {type: String, required: true},
+  stats: {
+    date: {type: Date, default: Date.now},
+    attempts: {type: Number}
+  }
 });
 
 //compiles schema into a model
