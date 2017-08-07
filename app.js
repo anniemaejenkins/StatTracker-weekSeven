@@ -24,7 +24,7 @@ mongoose.connect('mongodb://localhost:27017/statdb');
 app.get('/api/activities', activityController.list );
 
 //POST /api/activities make a activity
-app.post('api/activities', activityController.create);
+app.post('/api/activities', activityController.create);
 
 
 //GET /api/activites/:id
