@@ -18,15 +18,17 @@ module.exports = {
     let id = req.params.id;
     Activity.findById(id).then(results => {
       res.json(results);
+      // console.log(results);
     });
   },
   updateActivity: function(req, res) {
     let id = req.params.id;
     Activity.findById(id).then(results => {
-      results.activity = req.body.activity;
-      results.date = req.body.date;
-      results.attempts = req.body.attempts;
-      Activity.save();
+      results.activity = req.body.activity || results.activity;
+      results.date = req.body.stats.date || results.date;
+      results.attempts = req.body.stats.attempts || results.attempts;
+      results.save();
+      // console.log("update",results);
       res.json(results);
     });
   },
@@ -42,7 +44,7 @@ module.exports = {
     Activity.findById(id).then(results => {
       results.date = req.body.date;
       results.attempts = req.body.attempts;
-      Activity.save();
+      results.save();
       res.json(results);
     });
   },
