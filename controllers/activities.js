@@ -47,16 +47,24 @@ module.exports = {
       // console.log("hey",results);
     });
   },
-  // https://stackoverflow.com/questions/15641492/mongodb-remove-object-from-array
+  // // https://stackoverflow.com/questions/15641492/mongodb-remove-object-from-array
+  // deleteStats: function(req, res) {
+  //   let id = req.params.id;
+  //   let statId = req.params.statId;
+  //   Activity.update(
+  //     {'_id': id},
+  //     { $pull: { "stats" : { id: statId } } }
+  //   ).then(results => {
+  //     res.json(results);
+  //   });
   deleteStats: function(req, res) {
     let id = req.params.id;
-    let statId = req.params.statId;
-    Activity.update(
-      {'_id': id},
-      { $pull: { "stats" : { id: statId } } }
-    ).then(results => {
+    Activity.findById(id).then(results => {
+      results.stats = {};
+      results.save();
       res.json(results);
+      console.log("results", results);
     });
-
   }
+
 };
