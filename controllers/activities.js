@@ -25,8 +25,6 @@ module.exports = {
     let id = req.params.id;
     Activity.findById(id).then(results => {
       results.activity = req.body.activity || results.activity;
-      results.date = req.body.stats.date || results.date;
-      results.attempts = req.body.stats.attempts || results.attempts;
       results.save();
       // console.log("update",results);
       res.json(results);
@@ -42,10 +40,11 @@ module.exports = {
   updateStats: function(req, res) {
     let id = req.params.id;
     Activity.findById(id).then(results => {
-      results.date = req.body.date;
-      results.attempts = req.body.attempts;
+      results.stats.attempts = results.stats.attempts + 1;
+      results.stats.date = new Date();
       results.save();
       res.json(results);
+      // console.log("hey",results);
     });
   },
   // https://stackoverflow.com/questions/15641492/mongodb-remove-object-from-array
@@ -54,7 +53,7 @@ module.exports = {
     let statId = req.params.statId;
     Activity.update(
       {'_id': id},
-      { $pull: { "stats" : { id: statId} } }
+      { $pull: { "stats" : { id: statId } } }
     ).then(results => {
       res.json(results);
     });
