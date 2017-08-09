@@ -63,8 +63,7 @@ module.exports = {
       results.stats = {};
       results.save();
       res.json(results);
-      console.log("results", results);
+      // console.log("results", results);
     });
   }
-
 };
