@@ -8,26 +8,39 @@ const path = require('path');
 
 const activityController = require('./controllers/activities.js');
 
+// require in models
+const Activity = require('./models/activity');
+const User = require('./models/user');
 
 
 const app = express();
 
-const users = {
-  'annie': 'zach'
-};
+// const users = new User({
+//   username: 'annie',
+//   password: 'zach'
+// });
+// users.save();
+
+
+// const users = {
+//   'annie': 'zach'
+// };
+
+
 
 passport.use(new BasicStrategy(
   function(username, password, done) {
-    const userPassword = users[username];
-    if (!userPassword) { return done(null, false); }
-    if (userPassword !== password) { return done(null, false); }
-    return done(null, username);
+    User.findOne({ username: username, password: password }).then(function(user) {
+      if(!user) {
+        return done(null, false);
+      } else {
+        return done(null, username);
+      }
+    });
   }
 ));
 
-// require in models
-const Activity = require('./models/activity');
-const User = require('./models/user');
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
